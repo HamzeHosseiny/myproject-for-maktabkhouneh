@@ -14,6 +14,7 @@ class CategoryManager(models.Manager):
 class Category(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
     is_active = models.BooleanField(default=True)
     position = models.PositiveIntegerField()
 

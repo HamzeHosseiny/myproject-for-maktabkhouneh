@@ -2,8 +2,9 @@ from django.contrib import admin
 from .models import Article, Category
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug')
+    list_display = ('title', 'slug', 'parent')
     prepopulated_fields = {'slug': ('title',)}
+    ordering = ('parent_id',)
 
 admin.site.register(Category, CategoryAdmin)
 

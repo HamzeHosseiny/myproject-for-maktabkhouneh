@@ -7,7 +7,7 @@ register = template.Library()
 def title(Data="Blog"):
     return Data
 
-@register.inclusion_tag('blog/category_navbar.html')
+@register.inclusion_tag('blog/categro_navbar.html')
 def category_navbar():
-    categories = Category.objects.all()
+    categories = Category.objects.activ_cat()
     return {'category_list': categories}
