@@ -16,9 +16,9 @@
           <h2>Blog</h2>
 
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li>Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia reiciendis</li>
+            <li><a href="{% url 'website:web_home' %}">Home</a></li>
+            <li><a href="{% url 'blog:home' %}">Blog</a></li>
+            <li>{{Article.title}}</li>
           </ol>
         </div>
 

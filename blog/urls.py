@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import home, blog_single, blog_category
+from .views import ArticleListView, ArticleDetailView, ArticleCategoryView, AuthorArticleListView
 
 app_name = 'blog'
 urlpatterns = [
-    path('', home, name = 'home'),
-    path('article/<slug:slug>/', blog_single, name = 'single'),
-    path('category/<slug:slug>/', blog_category, name = 'category'),
+    path('', ArticleListView.as_view(), name = 'home'),
+    path('article/<slug:slug>/', ArticleDetailView.as_view(), name = 'single'),
+    path('category/<slug:slug>/', ArticleCategoryView.as_view(), name = 'category'),
+    path('Author/<slug:username>/', AuthorArticleListView.as_view(), name = 'author'),
 ]

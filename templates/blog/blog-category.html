@@ -56,14 +56,14 @@
             {% endfor %}
             <div class="blog-pagination">
               <ul class="justify-content-center">
-                {% if Articles.has_previous %}
-                <li><a href="{% url 'blog:category' slug=Category.slug %}?page={{Articles.previous_page_number}}">&lt;</a></li>
+                {% if page_obj.has_previous %}
+                <li><a href="{% url 'blog:category' slug=Category.slug %}?page={{page_obj.previous_page_number}}">&lt;</a></li>
                 {% endif %}
                 <li><a href="#">1</a></li>
                 <li class="active"><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
-                {% if Articles.has_next %}
-                <li><a href="{% url 'blog:category' slug=Category.slug %}?page={{Articles.next_page_number}}">&gt;</a></li>
+                {% if page_obj.has_next %}
+                <li><a href="{% url 'blog:category' slug=Category.slug %}?page={{page_obj.next_page_number}}">&gt;</a></li>
                 {% endif %}
               </ul>
             </div>

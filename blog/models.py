@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.html import format_html
+from django.contrib.auth.models import User
 
 # create a manager.
 class ArticleManager(models.Manager):
@@ -35,6 +37,7 @@ class Article(models.Model):
         ('p', 'Publish'),
     )
     title = models.CharField(max_length = 255)
+    Author = models.ForeignKey(User, null=True ,on_delete=models.SET_NULL, related_name='articles')
     slug = models.SlugField(max_length = 255, unique = True)
     category = models.ManyToManyField(Category, related_name='articles')
     thumbnail = models.ImageField(upload_to = "images")
@@ -54,3 +57,9 @@ class Article(models.Model):
 
     def Category_to_string(self):
         return ", ".join([str(title) for title in self.active_category()])
+
+    def thumbnail_tag(self):
+        return format_html("<img width=100 height=75 style='border-radius: 10px'; src='{}'/>".format(self.thumbnail.url))
+
+    thumbnail_tag.short_description = 'Thumbnail'
+    thumbnail_tag.allow_tags = True

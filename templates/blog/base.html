@@ -51,9 +51,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="" href="index.html">Home</a></li>
+          <li><a class="" href="{% url 'website:web_home' %}">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a class="active" href="blog.html">Blog</a></li>
+          <li><a class="active" href="{% url 'blog:home' %}">Blog</a></li>
           <li><a href="contact.html">Contact Us</a></li>
           {% category_navbar %}
         </ul>
