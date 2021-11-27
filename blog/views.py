@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.core.paginator import Paginator
+from acount.mixins import AuthorEditAccessMixin
 from .models import Article, Category
 from django.contrib.auth.models import User
 
@@ -34,6 +34,16 @@ class ArticleDetailView(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Article.objects.published(), slug = slug)
+
+
+class ArticlePreviewView(AuthorEditAccessMixin, DetailView):
+    model = Article
+    template_name = 'blog/blog-single.html'
+    context_object_name = 'Article'
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article, pk = pk)
 
 #def blog_category(request, slug):
 #    category = get_object_or_404(Category, slug = slug)

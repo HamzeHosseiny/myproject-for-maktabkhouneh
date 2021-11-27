@@ -1,5 +1,85 @@
 {% extends 'registration/base.html' %}
 {% block title %}{{user.get_full_name}}'s Articles{% endblock %}
 {% block content %}
- wellcome {{user.get_full_name}}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Responsive Hover Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Picture</th>
+                      <th>Description</th>
+                      <th>Categories</th>
+                      <th>Author</th>
+                      <th>Special</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for article in articles %}
+                    <tr>
+                      {% if article.status in 'dr'|make_list or user.is_superuser %}
+                      <td><a href="{% url 'accounts:article_update' article.pk %}">{{article.title}}</a></td>
+                      {% else %}
+                      <td>{{article.title}}</td>
+                      {% endif %}
+                      <td><img src="{{article.thumbnail.url}}" width="120px" height="60px"></td>
+                      <td>{{article.description|safe|truncatechars:"30"}}</td>
+                      <td>{{article.Category_to_string}}</td>
+                      <td>{{article.Author.get_full_name}}</td>
+                      <td>{% if article.is_special %}
+                          <span class="badge badge-success">Special</span>
+                          {% else %}
+                          <span class="badge badge-danger">Normal</span>
+                          {% endif %}
+                      </td>
+                      <td>
+                        {% if article.status == "p" %}
+                            <span class="badge badge-success">Approved</span>
+                            <a target="_blank" class="badge badge-primary" href="{% url 'blog:single' slug=article.slug %}">See in site</a>
+                        {% elif article.status == "i" %}
+                        <span class="badge badge-success">Investigation</span>
+                          {% if user.is_superuser %}
+                            <a target="_blank" class="badge badge-primary" href="{% url 'blog:preview' pk=article.pk %}">Preview</a>
+                          {% endif %}
+                        {% else %}
+                          {% if article.status == 'd' %}
+                            <span class="badge badge-danger">Drafted</span>
+                          {% else %}
+                            <span class="badge badge-warning">Rejected</span>
+                            <a target="_blank" class="badge badge-primary" href="{% url 'blog:preview' pk=article.pk %}">Preview</a>
+                          {% endif %}
+                        {% endif %}
+                        {% if user.is_superuser %}
+                          <a class="badge badge-primary" href="{% url 'accounts:article_delete' article.pk %}">DELETE</a>
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
 {% endblock %}

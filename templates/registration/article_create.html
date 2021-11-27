@@ -1,0 +1,48 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{user.get_full_name}}'s Articles{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Quick Example</h3>
+        </div>
+  <form method="post" enctype="multipart/form-data">
+    <div class="card-body">
+        <div class="row">
+        {% csrf_token %}
+        <div class="form-group col-md-6 mb-0">
+            {{ form.title|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.thumbnail|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-12 mb-0">
+            {{ form.description|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.category|as_crispy_field }}
+        </div>
+        {% if user.is_superuser %}
+            <div class="form-group col-md-6 mb-0">
+                {{ form.Author|as_crispy_field }}
+                {{ form.status|as_crispy_field }}
+                {{form.is_special|as_crispy_field}}
+            </div>
+        {% endif %}
+        <div class="form-group col-md-6 mb-0">
+            {{ form.published_date|as_crispy_field }}
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </div>
+    {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+    <a href="{% url 'accounts:article_delete' request.resolver_match.kwargs.pk %}" class="btn btn-danger">
+    DELETE
+    </a>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

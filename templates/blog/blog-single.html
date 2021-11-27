@@ -41,6 +41,9 @@
 
               <h2 class="entry-title">
                 <a href="blog-single.html">{{ Article.title }}</a>
+                {% if Article.is_special %}
+                  <span class="badge badge-danger">Special</span>
+                {% endif %}
               </h2>
 
               <div class="entry-meta">
@@ -53,7 +56,16 @@
 
               <div class="entry-content">
                 <p>
-                {{ Article.description }}
+                {% if Article.is_special %}
+                  {% if user.is_authenticated and user.is_special_user or user.is_superuser or user == article.Author %}
+                    {{ Article.description|safe }}
+                  {% else %}
+                    {{ Article.description|safe|truncatechars:200 }}
+                    <p class="alert alert-warning"> This article is special. You have to <a class="alert-link" href="#">pay money!</a> </p>
+                  {% endif %}
+                {% else %}
+                  {{ Article.description|safe }}
+                {% endif %}
                 </p>
 
               </div>

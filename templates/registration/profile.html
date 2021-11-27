@@ -1,0 +1,39 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{user.get_full_name}}'s Articles{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Quick Example</h3>
+        </div>
+  <form method="post" enctype="multipart/form-data">
+    <div class="card-body">
+        <div class="row">
+        {% csrf_token %}
+        <div class="form-group col-md-6 mb-0">
+            {{ form.username|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.email|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.first_name|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.last_name|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.special_user|as_crispy_field }}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.is_author|as_crispy_field }}
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.html import format_html
-from django.contrib.auth.models import User
+from acount.models import User
+import uuid
 
 # create a manager.
 class ArticleManager(models.Manager):
@@ -35,16 +36,19 @@ class Article(models.Model):
     STATUS_CHOICES = (
         ('d', 'Draft'),
         ('p', 'Publish'),
+        ('i', 'investigation'),
+        ('r', 'rejected'),
     )
     title = models.CharField(max_length = 255)
     Author = models.ForeignKey(User, null=True ,on_delete=models.SET_NULL, related_name='articles')
-    slug = models.SlugField(max_length = 255, unique = True)
+    slug = models.SlugField(max_length = 255, unique = True, default = uuid.uuid4)
     category = models.ManyToManyField(Category, related_name='articles')
     thumbnail = models.ImageField(upload_to = "images")
     description = models.TextField()
     created_date = models.DateTimeField(auto_now_add = True)
     updated_date = models.DateTimeField(auto_now = True)
     published_date = models.DateTimeField(default = timezone.now)
+    is_special = models.BooleanField(default=False)
     status = models.CharField(max_length = 1, choices = STATUS_CHOICES)
 
     def __str__(self):

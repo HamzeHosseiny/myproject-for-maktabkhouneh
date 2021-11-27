@@ -35,6 +35,9 @@
 
               <h2 class="entry-title">
                 <a href="{% url 'blog:single' slug=Article.slug %}">{{ Article.title }}</a>
+                {% if Article.is_special %}
+                  <span class="badge badge-danger">Special</span>
+                {% endif %}
               </h2>
 
               <div class="entry-meta">
@@ -47,7 +50,7 @@
 
               <div class="entry-content">
                 <p>
-                  {{ Article.description }}
+                  {{ Article.description|safe }}
                 </p>
                 <div class="read-more">
                   <a href="{% url 'blog:single' slug=Article.slug %}">Read More</a>
