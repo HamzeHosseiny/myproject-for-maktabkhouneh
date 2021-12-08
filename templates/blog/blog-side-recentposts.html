@@ -1,0 +1,13 @@
+{% load static %}
+{% load humanize %}
+<h3 class="sidebar-title">Recent Posts</h3>
+<div class="sidebar-item recent-posts">
+  {% for art in articles %}
+  <div class="post-item clearfix">
+    <img src={{art.thumbnail.url}} alt="">
+    <h4><a href="{% url 'blog:single' art.slug %}">{{art.title}}</a></h4>
+    <time>{{art.published_date|naturaltime}}</time>
+  </div>
+  {% endfor %}
+
+</div>

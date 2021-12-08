@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.utils.html import format_html
 from acount.models import User
 import uuid
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 # create a manager.
 class ArticleManager(models.Manager):
@@ -12,6 +14,10 @@ class ArticleManager(models.Manager):
 class CategoryManager(models.Manager):
     def activ_cat(self):
         return self.filter(is_active=True)
+
+
+class IpAddress(models.Model):
+    ip_address = models. GenericIPAddressField()
 
 
 class Category(models.Model):
@@ -50,6 +56,8 @@ class Article(models.Model):
     published_date = models.DateTimeField(default = timezone.now)
     is_special = models.BooleanField(default=False)
     status = models.CharField(max_length = 1, choices = STATUS_CHOICES)
+    comments = GenericRelation(Comment)
+    hits = models.ManyToManyField(IpAddress, through="ArticleHits", blank=True, related_name='hits')
 
     def __str__(self):
         return self.title
@@ -67,3 +75,8 @@ class Article(models.Model):
 
     thumbnail_tag.short_description = 'Thumbnail'
     thumbnail_tag.allow_tags = True
+
+class ArticleHits(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IpAddress, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)

@@ -1,3 +1,5 @@
+{% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,11 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Diagoona Template - Contact page</title>
+    <title>Contact page</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" /> <!-- https://getbootstrap.com/ -->
-    <link href="fontawesome/css/all.min.css" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
-    <link href="css/templatemo-diagoona.css" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" /> <!-- https://getbootstrap.com/ -->
+    <link href="{% static 'fontawesome/css/all.min.css' %}" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
+    <link href="{% static 'css/templatemo-diagoona.css' %}" rel="stylesheet" />
 <!--
 
 TemplateMo 550 Diagoona
@@ -26,8 +28,8 @@ https://templatemo.com/tm-550-diagoona
                     <div class="tm-site-header media">
                         <i class="fas fa-umbrella-beach fa-3x mt-1 tm-logo"></i>
                         <div class="media-body">
-                            <h1 class="tm-sitename text-uppercase">diagoona</h1>
-                            <p class="tm-slogon">new bootstrap template</p>
+                            <h1 class="tm-sitename text-uppercase">HAMZE</h1>
+                            <p class="tm-slogon">You send your message here</p>
                         </div>        
                     </div>
                 </div>
@@ -41,16 +43,16 @@ https://templatemo.com/tm-550-diagoona
                         <div class="collapse navbar-collapse tm-nav" id="navbar-nav">
                             <ul class="navbar-nav text-uppercase">
                                 <li class="nav-item">
-                                    <a class="nav-link tm-nav-link" href="index.html">Home</a>
+                                    <a class="nav-link tm-nav-link" href="{% url 'website:web_home' %}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link tm-nav-link" href="about.html">About</a>
+                                    <a class="nav-link tm-nav-link" href="{% url 'website:about' %}">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link tm-nav-link" href="services.html">Services</a>
+                                    <a class="nav-link tm-nav-link" href="{% url 'blog:home' %}">Blog</a>
                                 </li>                            
                                 <li class="nav-item active">
-                                    <a class="nav-link tm-nav-link" href="contact.html">Contact <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link tm-nav-link" href="{% url 'website:contact' %}">Contact <span class="sr-only">(current)</span></a>
                                 </li>
                             </ul>                            
                         </div>                        
@@ -63,16 +65,17 @@ https://templatemo.com/tm-550-diagoona
                 <main class="tm-col-right tm-contact-main"> <!-- Content -->
                     <section class="tm-content tm-contact">
                         <h2 class="mb-4 tm-content-title">Contact Us</h2>
-                        <p class="mb-85">Etiam et egestas arcu. Fusce congue quis elit vitae commodo. Cras neque mauris, vehicula in ipsum sit amet, faucibus aliquam arcu.</p>
-                        <form id="contact-form" action="" method="POST">
+                        <p class="mb-85">I am happy to help.</p>
+                        <form id="contact-form" action="{% url 'website:contact' %}" method="POST">
+                            {% csrf_token %}
                             <div class="form-group mb-4">
-                                <input type="text" name="name" class="form-control" placeholder="Name" required="" />
+                                {{form.name|add_class:'form-control'|append_attr:"placeholder:Name"}}
                             </div>
                             <div class="form-group mb-4">
-                                <input type="email" name="email" class="form-control" placeholder="Email" required="" />
+                                {{form.email|add_class:'form-control'|append_attr:"placeholder:Email"}}
                             </div>
                             <div class="form-group mb-5">
-                                <textarea rows="6" name="message" class="form-control" placeholder="Message..." required=""></textarea>
+                                {{form.message|add_class:'form-control'|append_attr:"placeholder:Message..."}}
                             </div>
                             <div class="text-right">
                                 <button type="submit" class="btn btn-big btn-primary">Send It</button>
@@ -93,9 +96,6 @@ https://templatemo.com/tm-550-diagoona
             </div>        
             <div class="tm-col-right tm-col-footer">
                 <footer class="tm-site-footer text-right">
-                    <p class="mb-0">Copyright 2020 Diagoona Co. 
-                    
-                    | Design: <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-text-link">TemplateMo</a></p>
                 </footer>
             </div>  
         </div>
@@ -106,9 +106,14 @@ https://templatemo.com/tm-550-diagoona
         </div>
     </div>
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.backstretch.min.js"></script>
-    <script src="js/templatemo-script.js"></script>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
+    <script src="{% static 'js/templatemo-script.js' %}"></script>
+    <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 650px; width: 1356px; z-index: -999999; position: fixed;">
+        <div class="backstretch-item" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 100%; height: 100%; z-index: -999999;">
+            <img src="{% static 'img/diagoona-bg-3.jpg' %}" style="background-size: cover; position: auto; margin: 0px; padding: 0px; border: none; width: 100%; height: 100%; max-width: none; inset: -249.69px auto auto 0px;">
+        </div>
+    </div>
 </body>
 </html>

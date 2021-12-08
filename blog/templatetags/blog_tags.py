@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Category
+from blog.models import Article, Category
 
 register = template.Library()
 
@@ -20,3 +20,19 @@ def link(request, link_name, content, link_icon):
             'link_icon': link_icon,
             'link': "accounts:{}".format(link_name),
             }
+
+@register.inclusion_tag('blog/blog-side-categories.html')
+def SidebarCategories():
+    articles = Article.objects.published()
+    categories = Category.objects.activ_cat()
+    cat_dict = {}
+    for name in categories:
+        cat_dict[name] = articles.filter(category=name).count()
+    return {'categories': cat_dict}
+
+@register.inclusion_tag('blog/blog-side-recentposts.html')
+def SidebarRecentPosts():
+    articles = Article.objects.published()[:5]
+    return {'articles': articles}
+    
+    

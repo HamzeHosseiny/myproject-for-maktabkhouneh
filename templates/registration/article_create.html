@@ -29,9 +29,9 @@
             <div class="form-group col-md-6 mb-0">
                 {{ form.Author|as_crispy_field }}
                 {{ form.status|as_crispy_field }}
-                {{form.is_special|as_crispy_field}}
             </div>
         {% endif %}
+        <div class="col-6">{{form.is_special|as_crispy_field}}</div>
         <div class="form-group col-md-6 mb-0">
             {{ form.published_date|as_crispy_field }}
         </div>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Category
+from .models import Article, Category, IpAddress
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'parent')
@@ -15,3 +15,4 @@ class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     radio_fields = {"status": admin.VERTICAL}
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(IpAddress)

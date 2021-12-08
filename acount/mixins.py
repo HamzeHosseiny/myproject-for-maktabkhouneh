@@ -41,7 +41,10 @@ class AuthorEditAccessMixin():
 class AuthorsEditAccessMixin():
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_superuser or request.user.is_author:
-            return super().dispatch(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            if request.user.is_superuser or request.user.is_author:
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                return redirect('accounts:profile')
         else:
-            return redirect('accounts:profile')
+            return redirect('login')
