@@ -7,7 +7,7 @@
 <div class="col-md-12">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Quick Example</h3>
+            <h3 class="card-title">{{user.get_full_name}}</h3>
         </div>
   <form method="post" enctype="multipart/form-data">
     <div class="card-body">
@@ -28,10 +28,12 @@
         {% if user.is_superuser %}
             <div class="form-group col-md-6 mb-0">
                 {{ form.Author|as_crispy_field }}
-                {{ form.status|as_crispy_field }}
             </div>
         {% endif %}
-        <div class="col-6">{{form.is_special|as_crispy_field}}</div>
+        <div class="form-group col-md-6 mb-0">
+            {{ form.status|as_crispy_field }}
+        </div>
+        <div class="col-6">Are you want your article to be for special users only?{{form.is_special|as_crispy_field}}</div>
         <div class="form-group col-md-6 mb-0">
             {{ form.published_date|as_crispy_field }}
         </div>

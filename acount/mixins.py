@@ -9,7 +9,7 @@ class FieldMixin():
         if request.user.is_superuser:
             self.fields = ['title', 'Author', 'category', 'thumbnail', 'description', 'published_date', 'is_special', 'status']
         elif request.user.is_author:
-            self.fields = ['title', 'category', 'thumbnail', 'description', 'is_special', 'published_date']
+            self.fields = ['title', 'category', 'thumbnail', 'description', 'is_special', 'published_date', 'status']
         else:
             raise Http404
         return super().dispatch(request, *args, **kwargs)

@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
     <main id="main">
@@ -36,9 +37,9 @@
               </h2>
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ Article.created_date }}</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'blog:author' username=Article.Author.username %}">{{Article.Author.get_full_name}}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="2020-01-01">{{ Article.created_date|naturaltime }}</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#">views: {{Article.hits.count}}</a></li>
                 </ul>
               </div>
               <div class="entry-content">

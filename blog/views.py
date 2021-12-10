@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from acount.mixins import AuthorEditAccessMixin
 from django.views.generic import ListView, DetailView
 
+
 #def home(request):
 #    articles = Article.objects.published()
 #    paginator = Paginator(articles, 1)
@@ -12,32 +13,36 @@ from django.views.generic import ListView, DetailView
 #    context = {'Articles': articles}
 #    return render(request, 'blog/blog.html', context)
  
+
 class ArticleListView(ListView):
     model = Article
     template_name = 'blog/blog.html'
     context_object_name = 'Articles'
-    paginate_by = 1
+    paginate_by = 5
 
     def get_queryset(self):
         return Article.objects.published()
+
 
 class SearchListView(ListView):
     model = Article
     template_name = 'blog/search.html'
     context_object_name = 'Articles'
-    paginate_by = 1
+    paginate_by = 5
 
     def get_queryset(self):
         search = self.request.GET.get('q')
-        if not search:
-            return Article.objects.none()
+        if search:
+            object_list = Article.objects.filter(description__icontains=search)
         else:
-            return Article.objects.filter(description__icontains=search)
+            object_list = self.model.objects.none()
+        return object_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search'] = self.request.GET.get('q')
         return context
+  
   
 #def blog_single(request, slug):
 #    article = get_object_or_404(Article.objects.published(), slug = slug)
