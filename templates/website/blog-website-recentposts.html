@@ -1,0 +1,28 @@
+{% load humanize %}
+<section class="features">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Recent blog posts</h2>
+        <p>In this section our last blog posts are showed.</p>
+      </div>
+      {% for art in articles %}
+      <div class="row" data-aos="fade-up">
+        <div class="col-md-5">
+          <img src="{{art.thumbnail.url}}" class="img-fluid">
+        </div>
+        <div class="col-md-7 pt-4">
+          <h3>{{art.title}}</h3>
+          <p class="fst-italic">
+            {{art.description|safe|truncatechars:200}}
+          </p>
+          <ul>
+            <li><i class="bi bi-check"></i>{{art.published_date|naturaltime}}</li>
+            <li><i class="bi bi-check"></i> views: {{art.hits.count}}</li>
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </section>

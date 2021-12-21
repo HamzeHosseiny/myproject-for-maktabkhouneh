@@ -414,7 +414,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 --------------------------------------------------------------*/
 #hero-no-slider {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -426,7 +426,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   top: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to right, rgba(20, 35, 42, 0.061), rgba(20, 34, 41, 0.109)), url("../img/hero-bg.jpg") center top no-repeat;
+  background: linear-gradient(to right, rgba(30, 67, 86, 0.8), rgba(30, 67, 86, 0.6)), url("../img/hero-bg.jpg") center top no-repeat;
 }
 #hero-no-slider h2 {
   color: #fff;

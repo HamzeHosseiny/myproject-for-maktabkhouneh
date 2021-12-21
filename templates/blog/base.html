@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Blog - Moderna Bootstrap Template</title>
+  <title>Blog</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -49,9 +49,14 @@
   <header id="header" class="fixed-top d-flex align-items-center ">
     <div class="container d-flex justify-content-between align-items-center">
 
-      <div class="logo">
+      <div class="logo" style="color:red;">
       {% block title %}{% title %}{% endblock title %}
-        <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" class="img-fluid"></a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}" style="color:white; ml:10px;">Logout</a>
+          <a href="{% url 'accounts:profile' %}" style="color:white; ml:10px;">{{request.user.get_full_name}}</a>
+        {% else %}
+          <a href="{% url 'login' %}" style="color:white; ml:10px;">Login</a>
+        {% endif %}
       </div>
 
       <nav id="navbar" class="navbar">
@@ -81,7 +86,8 @@
             <p>Inter your email here for newsletter. </p>
           </div>
           <div class="col-lg-6">
-            <form action="" method="post">
+            <form action="{% url 'website:Newsletter' %}" method="post">
+              {% csrf_token %}
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
           </div>

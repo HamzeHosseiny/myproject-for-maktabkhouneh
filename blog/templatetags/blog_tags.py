@@ -35,4 +35,8 @@ def SidebarRecentPosts():
     articles = Article.objects.published()[:5]
     return {'articles': articles}
     
-    
+
+@register.inclusion_tag('website/blog-website-recentposts.html')
+def WebSiteRecentPosts():
+    articles = Article.objects.published()[:4]
+    return {'articles': articles}    

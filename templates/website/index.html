@@ -1,109 +1,83 @@
+{% extends 'blog/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% load blog_tags %}
+<!-- ======= Hero Section ======= -->
+{% block content %}
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Diagoona HTML CSS Template</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" /> <!-- https://getbootstrap.com/ -->
-    <link href="{% static 'fontawesome/css/all.min.css' %}" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
-    <link href="{% static 'css/templatemo-diagoona.css' %}" rel="stylesheet" />
-<!--
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Hosseiny Blog</span></h2>
+          <p class="animate__animated animate__fadeInUp">This blog is my second prject in django and i make it as final project of django course in maktabkhounek.</p>
+          <a href="{% url 'website:about' %}" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
 
-TemplateMo 550 Diagoona
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Contact Me</h2>
+          <p class="animate__animated animate__fadeInUp">If you want to speak with me.</p>
+          <a href="{% url 'website:contact' %}" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
 
-https://templatemo.com/tm-550-diagoona
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Blog</h2>
+          <p class="animate__animated animate__fadeInUp">Visit the blog section.</p>
+          <a href="{% url 'blog:home' %}" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
+        </div>
+      </div>
 
--->
-</head>
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+      </a>
 
-<body>
-    <div class="tm-container">        
-        <div>
-            <div class="tm-row pt-4">
-                <div class="tm-col-left">
-                    <div class="tm-site-header media">
-                        <i class="fas fa-umbrella-beach fa-3x mt-1 tm-logo"></i>
-                        <div class="media-body">
-                            <h1 class="tm-sitename text-uppercase">HAMZE</h1>
-                            <p class="tm-slogon">My first website</p>
-                        </div>        
-                    </div>
-                </div>
-                <div class="tm-col-right">
-                    <nav class="navbar navbar-expand-lg" id="tm-main-nav">
-                        <button class="navbar-toggler toggler-example mr-0 ml-auto" type="button" 
-                            data-toggle="collapse" data-target="#navbar-nav" 
-                            aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span><i class="fas fa-bars"></i></span>
-                        </button>
-                        <div class="collapse navbar-collapse tm-nav" id="navbar-nav">
-                            <ul class="navbar-nav text-uppercase">
-                                <li class="nav-item active">
-                                    <a class="nav-link tm-nav-link" href="{% url 'website:web_home' %}">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link tm-nav-link" href="{% url 'website:about' %}">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link tm-nav-link" href="{% url 'blog:home' %}">Blog</a>
-                                </li>                            
-                                <li class="nav-item">
-                                    <a class="nav-link tm-nav-link" href="{% url 'website:contact' %}">Contact</a>
-                                </li>
-                            </ul>                            
-                        </div>                        
-                    </nav>
-                </div>
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+  
+  <main id="main">
+    <!-- ======= Why Us Section ======= -->
+    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 video-box">
+            <img src="assets/img/why-us.jpg" class="img-fluid" alt="">
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-fingerprint"></i></div>
+              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
             </div>
-            
-            <div class="tm-row">
-                <div class="tm-col-left"></div>
-                <main class="tm-col-right">
-                    <section class="tm-content">
-                        <h2 class="mb-5 tm-content-title">Hello</h2>
-                        <p class="mb-5">Sign up in my website and enjoy the best blog that ever made...</p>
-                        <hr class="mb-5">
-                        <p class="mb-5"></p>                        
-                        <a href="{% url 'login' %}" class="btn btn-primary">Sign in</a>
-                        <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
-                    </section>
-                </main>
-            </div>
-        </div>        
 
-        <div class="tm-row">
-            <div class="tm-col-left text-center">            
-                <ul class="tm-bg-controls-wrapper">
-                    <li class="tm-bg-control active" data-id="0"></li>
-                    <li class="tm-bg-control" data-id="1"></li>
-                    <li class="tm-bg-control" data-id="2"></li>
-                </ul>            
-            </div>        
-            <div class="tm-col-right tm-col-footer">
-                <footer class="tm-site-footer text-right">
-                </footer>
-            </div>  
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-gift"></i></div>
+              <h4 class="title"><a href="">Nemo Enim</a></h4>
+              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+            </div>
+
+          </div>
         </div>
 
-        <!-- Diagonal background design -->
-        <div class="tm-bg">
-            <div class="tm-bg-left"></div>
-            <div class="tm-bg-right"></div>
-        </div>
-    </div>
+      </div>
+    </section><!-- End Why Us Section -->
 
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
-    <script src="{% static 'js/templatemo-script.js' %}"></script>
-<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 650px; width: 1356px; z-index: -999999; position: fixed;">
-    <div class="backstretch-item" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 100%; height: 100%; z-index: -999999;">
-        <img src="{% static 'img/diagoona-bg-3.jpg' %}" style="background-size: cover; position: auto; margin: 0px; padding: 0px; border: none; width: 100%; height: 100%; max-width: none; inset: -249.69px auto auto 0px;">
-    </div>
-</div>
-</body>
-</html>
+    <!-- ======= Features Section ======= -->
+    {% WebSiteRecentPosts %}
+<!-- End Features Section -->
+
+  </main><!-- End #main -->
+{% endblock content %}
